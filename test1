@@ -1,0 +1,74 @@
+import pandas
+import csv
+for i in range(1,4): 
+    url = 'https://www.cnyes.com/money/DepositRate1.aspx?rt=f&p=%s' % (str(i))
+    tb = pandas.read_html(url)[0] 
+    tb.to_csv(r'bank.csv', mode='a', encoding='utf_8_sig', header=1, index=0)
+    print('第'+str(i)+'頁抓取完成')
+
+with open('bank.csv', 'r') as h:
+  num=len(h.readlines())
+  with open('bank.csv', 'r', encoding="utf-8") as f:
+    reader=csv.reader(f)
+    result=list(reader)
+    with open('bank2.csv', 'w', encoding="utf-8", newline='') as d:
+        writer = csv.writer(d)
+        writer.writerow(result[0])
+        writer.writerow(['類別', '一般', '薪資轉帳', '證券戶', '1個月', '3個月', '6個月', '9個月', '1年', '1年', '2年', '3年'])
+        for i in range(0,num):
+          if result[i][0]=="臺灣銀行":
+            writer.writerow(result[i])
+          if result[i][0]=="臺灣土地銀行":
+            writer.writerow(result[i])
+          if result[i][0]=="合作金庫銀行":
+            writer.writerow(result[i])
+          if result[i][0]=="第一商業銀行":
+            writer.writerow(result[i])
+          if result[i][0]=="華南商業銀行":
+            writer.writerow(result[i])
+          if result[i][0]=="彰化商業銀行":
+            writer.writerow(result[i])
+          if result[i][0]=="上海商業儲蓄銀行":
+            writer.writerow(result[i])
+          if result[i][0]=="台北富邦銀行":
+            writer.writerow(result[i])
+          if result[i][0]=="國泰世華商業銀行":
+            writer.writerow(result[i])
+          if result[i][0]=="高雄銀行":
+            writer.writerow(result[i])
+          if result[i][0]=="兆豐國際商業銀行":
+            writer.writerow(result[i])
+          if result[i][0]=="台灣中小企銀":
+            writer.writerow(result[i])
+          if result[i][0]=="台中商業銀行":
+            writer.writerow(result[i])
+          if result[i][0]=="瑞興商業銀行":
+            writer.writerow(result[i])
+          if result[i][0]=="新光銀行":
+            writer.writerow(result[i])
+          if result[i][0]=="陽信商銀":
+            writer.writerow(result[i])
+          if result[i][0]=="聯邦銀行":
+            writer.writerow(result[i])
+          if result[i][0]=="遠東銀行":
+            writer.writerow(result[i])
+          if result[i][0]=="元大商業銀行":
+            writer.writerow(result[i])
+          if result[i][0]=="永豐商業銀行":
+            writer.writerow(result[i])
+          if result[i][0]=="玉山銀行":
+            writer.writerow(result[i])
+          if result[i][0]=="凱基銀行":
+            writer.writerow(result[i])
+          if result[i][0]=="台新銀行":
+            writer.writerow(result[i])
+          if result[i][0]=="日盛國際商業銀行":
+            writer.writerow(result[i])
+          if result[i][0]=="安泰銀行":
+            writer.writerow(result[i])
+          if result[i][0]=="中國信託銀行":
+            writer.writerow(result[i])
+
+dt=pandas.read_csv('bank2.csv')
+dt=dt.drop(["活期儲蓄存款","活期儲蓄存款.1", "活期儲蓄存款.2" ], axis=1)
+dt.to_csv(r'bank3.csv', mode='a', encoding='utf_8_sig', header=1, index=0)
